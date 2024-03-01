@@ -1,0 +1,32 @@
+.px-grid {
+	padding-left: 55px;
+	padding-right: 55px;
+	border:1px solid black;
+}
+
+.py {
+	padding-top: 65px;
+	padding-bottom: 65px;
+}
+
+.px-floor {
+	padding-left: 45px;
+	padding-right: 45px;
+}
+
+
+.safe {
+	background-color: springgreen;
+}
+
+.unsafe {
+	background-color: tomato;
+}
+
+.safe-legend {
+	color: springgreen;
+}
+
+.unsafe-legend {
+	color: tomato;
+}

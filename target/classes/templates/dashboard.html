@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Dashboard - PPE Tracker</title>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<!-- Material Design Bootstrap -->
+	<link rel="stylesheet" th:href="@{/css/mdb.min.css}">
+
+	<!-- Your custom styles (optional) -->
+	<style>
+	</style>
+</head>
+
+<body class="fixed-sn white-skin">
+	<div id="preloader" class="container-fluid text-center">
+		<div class="preloader-wrapper big active" style="position: absolute; margin-top: 50vh;">
+			<div class="spinner-layer spinner-red-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="display: none;" id="content">
+		<!-- Main Navigation -->
+
+		<div th:insert="~{header :: copy}"></div>
+
+		<!-- Main Navigation -->
+
+		<!-- Main layout -->
+		<main>
+			<div class="container-fluid">
+				<!-- Section: Main chart -->
+				<section>
+					<!-- Card -->
+					<div class="card ">
+						<!-- Card image -->
+						
+						<div class="card-body">
+								<div class="card-title text-center">
+									<h2>PPE Statistics of Premises</h2>
+								</div>
+							<div id="buildingStats" style="height: 380px;"></div>
+						</div>
+						<!-- Card image -->
+					</div>
+					<!-- Card -->
+
+				</section>
+				<!-- Section: Main chart -->
+			</div>
+		</main>
+		<!-- Main layout -->
+
+		<!-- Footer -->
+		<div th:insert="~{footer :: copy}"></div>
+		<!-- Footer -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<!-- JQuery -->
+	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" th:src="@{/js/common.js}"> </script>
+	<!-- <script type="text/javascript" th:src="@{/js/data.js}"></script> -->
+	<script type="text/javascript" th:src="@{js/chart.js}"></script>
+</body>
+
+</html>

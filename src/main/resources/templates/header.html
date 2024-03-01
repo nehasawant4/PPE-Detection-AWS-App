@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div th:fragment="copy">
+		<header>
+			<!-- Sidebar navigation -->
+			<div id="slide-out" class="side-nav fixed">
+				<ul class="custom-scrollbar">
+
+					<!-- Logo -->
+					<li class="logo-sn waves-effect py-3">
+						<div class="text-center">
+							<a href="#" class="pl-0"><img src="/img/logo.png" style="height: 50px; width: auto;"></a>
+						</div>
+					</li>
+					<div class="text-center">
+						<h2 class="elegant-color-dark">PPE TRACKER</h2>
+					</div>
+					<!-- Side navigation links -->
+					<li>
+						<ul class="collapsible collapsible-accordion">
+							<li><a href="/" class="collapsible-header waves-effect">
+									<i class="fas fa-home"></i>Home
+								</a></li>
+						</ul>
+						<hr>
+						<ul id="side-buildings" class="collapsible collapsible-accordion">
+							<!--Building Names Go Here!! -->
+						</ul>
+				</ul>
+				<div class="sidenav-bg mask-strong"></div>
+			</div>
+			<!-- Sidebar navigation -->
+
+			<!-- Navbar -->
+			<nav class="navbar fixed-top navbar-expand-lg scrolling-navbar double-nav ">
+
+				<!-- SideNav slide-out button -->
+				<div class="row vw-100">
+
+					<div class="col-md-4">
+						<div class="float-left">
+							<a href="#" data-activates="slide-out" class="button-collapse"><i
+									class="fas fa-bars"></i></a>
+						</div>
+
+						<!-- Breadcrumb -->
+						<div class="breadcrumb-dn mr-auto ">
+							<p><a href="#" class="pl-3"><img src="/img/logo.png"
+										style="height: 25px; width: auto;"></a></p>
+						</div>
+					</div>
+					<div class="col-md-4 text-center">
+						<h4> <b> PPE Tracker </b> </h4>
+					</div>
+
+					<div class="col-md-4 text-right">
+						<a href="/">
+							<h5> Dashboard</h5>
+						</a>
+					</div>
+				</div>
+			</nav>
+			<!-- Navbar -->
+		</header>
+		<script type="text/javascript" th:inline="javascript">
+			fetch("/building/").then(
+				res => {
+					res.json().then(building => {
+						if (building.length > 0) {
+							for (i in building) {
+								$('#side-buildings').append('<li><a href="/building/grid/' + building[i].id + '" class="collapsible-header waves-effect"><i class="far fa-building"></i>' + building[i].buildingName + '</a></li>')
+							}
+						}
+					})
+				})	
+		</script>
+	</div>
+</body>
+
+</html>

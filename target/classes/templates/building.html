@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Dashboard - PPE Tracker</title>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<!-- Material Design Bootstrap -->
+	<link rel="stylesheet" th:href="@{/css/mdb.min.css}">
+
+	<link rel="stylesheet" th:href="@{/css/structure.css}">
+	<!-- Your custom styles (optional) -->
+	<style>
+	</style>
+</head>
+
+<body class="fixed-sn white-skin">
+	<div id="preloader" class="container-fluid text-center">
+		<div class="preloader-wrapper big active" style="position: absolute; margin-top: 50vh;">
+			<div class="spinner-layer spinner-red-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="display: none;" id="content">
+		<!-- Main Navigation -->
+
+		<div th:insert="~{header :: copy}"></div>
+
+		<!-- Main Navigation -->
+
+		<!-- Main layout -->
+		<main style="margin: 0;">
+			<div class="container-fluid">
+				<div id="content">
+					<div class="container-fluid p-2 text-center" style="margin-top: 10px;">
+						<h3 id="buildingName"></h3>
+						<hr>
+						<div class="container-fluid mt-4">
+							<div class="row my-3">
+								<div class="col-md-4">
+									<p>Add Floor</p><i id="addFloor" data-mdb-toggle="tooltip"
+										title="Click to add Floor" class="fas fa-plus-circle"
+										style="font-size: 30px; cursor: pointer;"></i>
+								</div>
+								<div class="col-md-4">
+									<p>Delete Floor</p><i id="deleteFloor" data-mdb-toggle="tooltip"
+										title="Click to Delete Floor" class="fas fa-minus-circle"
+										style="font-size: 30px; cursor: pointer;"></i>
+								</div>
+								<div class="col-md-4">
+									<button type="button" class="btn btn-primary waves-effect waves-light mt-3"
+										data-toggle="modal" data-target="#basicExampleModal">
+										Upload Pictures</button>
+								</div>
+							</div>
+							<div class="row my-3">
+								<div class="col-sm-2">
+									<table>
+										<tbody id="floornames"></tbody>
+									</table>
+								</div>
+								<div class="col-sm-10 text-center">
+									<table class="shadow-lg bg-white rounded" border="1">
+										<tbody id="grid">
+										</tbody>
+									</table>
+								</div>
+								
+						</div>
+						
+						<div class="row my-3">
+								<ul class="list-group z-depth-1 list-group-horizontal">
+ 
+										<li class="list-group-item">
+										  <div class="md-v-line"></div><i class="fas fa-circle mr-4 pr-3 unsafe-legend"></i> Unsafe
+										</li>
+						   
+										<li class="list-group-item">
+										  <div class="md-v-line"></div><i class="fas fa-circle mr-5 safe-legend"></i>Safe
+										</li>
+						   
+										<li class="list-group-item">
+										  <div class="md-v-line"></div><i class="far fa-circle mr-5"></i>Empty
+										</li>
+									  </ul>
+							</div>
+						
+					</div>
+				</div>
+			</div>
+		</main>
+		<!-- Main layout -->
+
+		<!-- Modal -->
+		<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-center" id="exampleModalLabel">Upload
+							Pictures</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form action="#" th:action="@{/upload}" th:object="${formdata}" method="post"
+							enctype="multipart/form-data">
+							<input type="hidden" th:field="*{id}">
+							<div class="row my-3">
+								<div class="col-md-12">
+									<select th:field="*{floorName}" class="form-control" id="floors">
+										<option value="" disabled selected>Select Floor</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row my-4">
+								<div class="col-md-12">
+									<select th:field="*{wingName}" class="form-control" id="wings">
+										<option value="" disabled selected>Select Wings</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="custom-file my-1">
+								<input type="file" multiple class="custom-file-input" id="customFile"
+									th:field="*{images}"> <label class="custom-file-label" for="customFile">Choose
+									file</label>
+							</div>
+							<div class="my-3">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="wingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title text-center" id="exampleModalLabel">Add
+							Wing</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="row mb-2">
+							<div class="col-md-12 mb-4">
+								<div class="md-form">
+									<input type="text" id="wingName" class="form-control">
+									<label for="form1">Wing Name</label>
+								</div>
+							</div>
+						</div>
+						<div class="mt-3">
+							<button type="button" onclick="addWing()" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<div th:insert="~{footer :: copy}"></div>
+		<!-- Footer -->
+
+	</div>
+
+	<!-- SCRIPTS -->
+	<!-- JQuery -->
+	<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+	<script type="text/javascript" th:inline="javascript">
+		/*<![CDATA[*/
+		var building_id = /*[[${building_id}]]*/'1';
+		/*]]>*/
+	</script>
+	<script type="text/javascript" th:src="@{/js/building.js}">
+
+	</script>
+	<script type="text/javascript" th:src="@{/js/common.js}">
+
+	</script>
+
+</body>
+
+</html>
